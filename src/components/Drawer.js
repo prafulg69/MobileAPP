@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
-import {
-  Button,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import {Button,StyleSheet,Text,View,Image} from 'react-native';
 
 export default class Drawer extends Component {
 
@@ -12,17 +7,12 @@ export default class Drawer extends Component {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-        <Text style={styles.header}>
-          CCMT
-        </Text>
-        <Button
-          onPress={() => navigate('Home')}
-          title="Home"
-        />
-
-        <Button
-          onPress={() => navigate('Acharya')}
-          title="Acharya"
+        <View style={styles.image}>
+        <Image source={require('../assets/Drawer.png')} style={styles.header}>  
+        </Image>
+        </View>
+        <Button onPress={() => navigate('Home')} title="Home" />
+        <Button onPress={() => navigate('Acharya') }title="Acharya"
         />
       </View>
     );
@@ -33,12 +23,20 @@ export default class Drawer extends Component {
 const styles = StyleSheet.create({
   container: {
    // flex: 1,
-    backgroundColor: '#FFF',
-    alignItems: 'center',
-    justifyContent: 'center',
+    //backgroundColor: '#FFF',
+    //alignItems: 'center',
+    //justifyContent: 'center',
+    backgroundColor: '#C0C0C0',
   },
   header: {
-    fontSize: 20,
-    marginVertical: 20,
-  },
+    width:225,
+    height: 41,
+    marginTop:40,
+    marginLeft: 25,
+    marginBottom:40,
+   },
+  image:{
+    //backgroundColor: '#C0C0C0',
+    width:'100%',
+    },
 });

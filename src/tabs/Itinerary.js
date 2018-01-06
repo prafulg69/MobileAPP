@@ -50,28 +50,54 @@
   
     render() {
       const { navigate } = this.props.navigation;
-      return (
-          // <ScrollView style={styles.header}>
-          // <Button onPress={this.signInWithGoogleAsync.bind(this)} title='Google sign in'/>
-          // </ScrollView>
-         <View>
-           <Button
-           onPress={this.logIn.bind(this)}
-           title='facebook login'/>
-          
-          <Button onPress={this.onLoginPress} title='Google Login'/>
+     
+  return (
+  <View style={styles.container}>
+          <View style={styles.navBar}>
+            <Text style={styles.navBarButton} onPress={() => navigate('DrawerOpen')}>Menu</Text>
+            <Text style={styles.navBarHeader}>CCMT</Text>
+            <Text style={styles.navBarButton}></Text>
           </View>
-  
+          <View style={styles.content}>
+        
+          <Button
+             onPress={this.logIn.bind(this)}
+             title='facebook login'/>
+            
+            <Button onPress={this.onLoginPress} title='Google Login'/>
+        
+          </View>
+         
+  </View>
       );
     }
-  }
+    }
   
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#FFF',
-      alignItems: 'center',
-      justifyContent: 'center',
+      backgroundColor: '#C0C0C0'
+    },
+    backgroundImage: {
+      height: 300,
+    },
+    navBar: {
+      flexDirection: 'row',
+      paddingTop: 30,
+      height: 64,
+      backgroundColor: '#1EAAF1'
+    },
+  
+    navBarButton: {
+      color: '#FFFFFF',
+      textAlign:'center',
+      width: 64
+    },
+    navBarHeader: {
+      flex: 1,
+      color: '#FFFFFF',
+      fontWeight: 'bold',
+      textAlign: 'center'
     },
     header: {
       fontSize: 20,

@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  DrawerNavigator,
-  StackNavigator,
-  TabNavigator
-} from 'react-navigation';
+import {DrawerNavigator,StackNavigator,TabNavigator} from 'react-navigation';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Home from './src/tabs/Home';
 import Settings from './src/tabs/Settings';
@@ -11,20 +7,13 @@ import Itinerary from './src/tabs/Itinerary';
 import Event from './src/tabs/Event';
 import Acharya from './src/tabs/Acharya';
 import Modal from './src/screens/Modal';
+import Login from './src/screens/Login';
 import News from './src/screens/News';
-//import Drawerlan from './src/screens/Drawerlan';
 import Drawer from './src/components/Drawer';
 
 // Stack navigation for Settings and Profile screens
 const SettingsTab = StackNavigator({
-  // Settings: {
-  //   screen: Settings,
-  //   navigationOptions: {
-  //     header: null,               // Hide the header
-  //     headerBackTitle: 'Back',    // Title back button Back when we navigate to Profile from Settings
-  //   },
-  // },
-  Acharya: {
+Acharya: {
     screen: Acharya,
     navigationOptions: {
       header: null,               // Hide the header
@@ -77,10 +66,13 @@ export const TabNavigation = TabNavigator({
 
 // Wrap tab navigation into drawer navigation
 const TabsWithDrawerNavigation = DrawerNavigator({
+  Login:{
+    screen: Login,
+  },
   Tabs: {
     screen: TabNavigation,
-  }
-}, {
+  },
+ }, {
   // Register custom drawer component
   contentComponent: props => <Drawer {...props} />
 });
@@ -92,10 +84,10 @@ export default StackNavigator({
     screen: TabsWithDrawerNavigation,
   },
   Modal: {
-    screen: Modal
+    screen: Modal,
   },
   News: {
-    screen: News
+    screen: News,
   },
   Drawerlan: {
     screen: SettingsTab,

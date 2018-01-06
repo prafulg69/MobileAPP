@@ -31,7 +31,7 @@ export default class Acharya extends Component {
       .then(res => res.json())
       .then(res => {
         this.setState({
-          data: page === 1 ? res.results : [...this.state.data, ...res.results],
+          data: page === 1 ? res : [...this.state.data, ...res],
           error: res.error || null,
           loading: false,
           refreshing: false
