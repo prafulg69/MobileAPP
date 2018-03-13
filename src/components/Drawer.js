@@ -12,8 +12,8 @@ export default class Drawer extends Component {
         </Image>
         </View>
         <Button onPress={() => navigate('Home')} title="Home" />
-        <Button onPress={() => navigate('Acharya') }title="Acharya"
-        />
+        <Button onPress={() => navigate('Acharya') }title="Acharya"/>
+        <Button onPress={() => navigate('Registration') }title="Registration"/>
       </View>
     );
   }

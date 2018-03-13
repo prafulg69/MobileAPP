@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,                // Vertical padding
     borderBottomWidth: 3,               // Add thick border at the bottom
     borderBottomColor: 'transparent',   // Transparent border for inactive tabs
-    backgroundColor: '#000000',
+    backgroundColor: '#1EAAF1',
   },
   // Active tab container
   tabContainerActive: {

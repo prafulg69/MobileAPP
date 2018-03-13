@@ -6,6 +6,7 @@ import Settings from './src/tabs/Settings';
 import Itinerary from './src/tabs/Itinerary';
 import Event from './src/tabs/Event';
 import Acharya from './src/tabs/Acharya';
+import Registration from './src/tabs/Registration';
 import Modal from './src/screens/Modal';
 import Login from './src/screens/Login';
 import News from './src/screens/News';
@@ -15,6 +16,13 @@ import Drawer from './src/components/Drawer';
 const SettingsTab = StackNavigator({
 Acharya: {
     screen: Acharya,
+    navigationOptions: {
+      header: null,               // Hide the header
+      headerBackTitle: 'Back',    // Title back button Back when we navigate to Profile from Settings
+    },
+  },
+  Registration: {
+    screen: Registration,
     navigationOptions: {
       header: null,               // Hide the header
       headerBackTitle: 'Back',    // Title back button Back when we navigate to Profile from Settings

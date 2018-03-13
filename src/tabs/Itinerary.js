@@ -1,56 +1,38 @@
   import React, { Component } from 'react';
-  import { Button, StyleSheet,Text,View,ScrollView } from 'react-native';
+  import { Button, StyleSheet,Text,View,ScrollView,ListView,TouchableOpacity } from 'react-native';
   import HeaderButton from '../components/HeaderButton';
   import Expo from 'expo';
+  import Tabs from '../screens/tabs';
   
   export default class Event extends Component {
-   
-    signInWithGoogleAsync = async () => {
-      try {
-        const result = await Expo.Google.logInAsync({
-          androidClientId: 922846468899-vb4uqfhm22q3n8a68uo6ako98st7hb28.apps.googleusercontent.com,
-          iosClientId: 922846468899-dpih1njqbu56oe1h6otno11m4m747fqi.apps.googleusercontent.com,
-          scopes: ['profile'],
+    constructor(props) {
+      super(props);
+      this.state = {
+        isLoading: true
+      }
+    }
+  
+    componentDidMount() {
+      return fetch('http://staging.chinmayamission.com/wp-json/gcmw/v1/iti')
+        .then((response) => {console.log(response);
+                             return response.json();
+                            })
+        .then((responseJson) => {
+          let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+          this.setState({
+            isLoading: false,
+            dataSource: ds.cloneWithRows(responseJson),
+          }, function() {
+            // do something with new state
+          });
         })
-  
-        if (result.type === 'success') {
-          return result
-        }
-        return { cancelled: true }
-      } catch (e) {
-        return { error: e }
-      }
-    }
-  
-  
-    onLoginPress = async () => {
-      const result = await this.signInWithGoogleAsync()
-      // if there is no result.error or result.cancelled, the user is logged in
-      // do something with the result
-    }
-  
-    
-    async  logIn() {
-      const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync('255885858279306', {
-          permissions: ['public_profile'],
+        .catch((error) => {
+          console.error(error);
         });
-       if (type === 'success') {
-        // Get the user's name using Facebook's Graph API
-        console.log(response);
-        const response = await fetch(
-          `https://graph.facebook.com/me?access_token=${token}`
-        );
-         Alert.alert(
-          'Logged in!',
-          `Hi ${(await response.json()).name}!`,
-        );
-       
-      }
     }
-  
-    render() {
-      const { navigate } = this.props.navigation;
-     
+
+   render() {
+      const { navigate } = this.props.navigation;  
   return (
   <View style={styles.container}>
           <View style={styles.navBar}>
@@ -59,13 +41,32 @@
             <Text style={styles.navBarButton}></Text>
           </View>
           <View style={styles.content}>
-        
-          <Button
-             onPress={this.logIn.bind(this)}
-             title='facebook login'/>
-            
-            <Button onPress={this.onLoginPress} title='Google Login'/>
-        
+          <Tabs>
+          {/* First tab */}
+          <View title="Swami Swaroopananda" style={styles.content}>
+            <Text style={styles.header}>
+            Swami Swaroopananda Itinerary
+            </Text>
+            <Text style={styles.text}>
+           
+            </Text>
+          </View>
+          {/* Second tab */}
+          <View title="Swami Tejomayananda" style={styles.content}>
+          <ListView 
+          dataSource={this.state.dataSource}
+          renderRow={(rowData) => (
+          <TouchableOpacity style = {styles.Event} >
+            <Text> <Text style={[styles.title]}>Date:</Text><Text style={[styles.Event]}></Text> {rowData.startdate} To {rowData.enddate} </Text>
+           <Text> <Text style={[styles.title]}>Purpose: </Text> <Text> {rowData.purpose}</Text> </Text>
+           <Text> <Text style={[styles.title]}>Place: </Text> <Text> {rowData.place}</Text> </Text>
+           <Text> <Text style={[styles.title]}>Contact: </Text> <Text> {rowData.contact}</Text> </Text>
+           <Text> <Text style={[styles.title]}>Address: </Text> <Text style={[styles.address]}> {rowData.address}</Text> </Text>
+          </TouchableOpacity>
+          )}
+        />
+          </View>
+        </Tabs> 
           </View>
          
   </View>
@@ -99,9 +100,24 @@
       fontWeight: 'bold',
       textAlign: 'center'
     },
-    header: {
-      fontSize: 20,
-      marginVertical: 20,
+    content: {
+      flex: 1,                            // Take up all available space
+      },
+    Event: {
+      backgroundColor: '#F5F5F5',
+      marginBottom: 5,
+      marginTop: 5,
+    },
+    Event: {
+      backgroundColor: '#F5F5F5',
+      marginBottom: 5,
+      marginTop: 5,
+    },
+    title: {
+      fontWeight: 'bold',
+     },
+    address: {
+      marginLeft: 5,
     },
   });
   
